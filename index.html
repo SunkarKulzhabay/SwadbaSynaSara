@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="kk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Үйлену тойына шақыру — Дамир и Мадина</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&family=Marck+Script&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Подключение шрифтов уже есть в вашем линке */
+
+      .invitation-header {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .name-title {
+        font-family: "Marck Script", cursive;
+        font-size: 5rem; /* Адаптивно для мобильных */
+        color: #f9f7f2; /* Глубокий графитовый или выберите #8e735b для золотистого оттенка */
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+      }
+
+      .invitation-text {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+        font-style: italic;
+        letter-spacing: 2px;
+        color: #5d6d7e;
+        text-transform: lowercase; /* Маленькие буквы в этом шрифте выглядят очень стильно */
+      }
+
+      /* Анимация появления */
+      .fade-in {
+        animation: fadeInBackground 2.5s ease-in-out;
+      }
+
+      @keyframes fadeInBackground {
+        0% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Адаптивность для больших экранов */
+      @media (min-width: 768px) {
+        .name-title {
+          font-size: 8rem;
+        }
+        .invitation-text {
+          font-size: 3rem;
+        }
+      }
+
+      :root {
+        --gold: #d4af37;
+        --dark: #1a1a1a;
+        --cream: #f9f7f2;
+      }
+
+      body {
+        background-color: var(--cream);
+        font-family: "Montserrat", sans-serif;
+        margin: 0;
+        overflow-x: hidden;
+        color: var(--dark);
+      }
+
+      .hero-section {
+        height: 100vh;
+        /* Путь к фото оставлен как в вашем запросе */
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+          url("WhatsApp Image 2026-04-06 at 15.52.56 (1).jpeg");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        position: relative;
+      }
+
+      /* Анимация появления */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 1.5s ease,
+          transform 1.5s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Обновленные стили шрифтов */
+      .script-font {
+        font-family: "Bad Script", cursive;
+      }
+
+      .serif-font {
+        font-family: "Cormorant Garamond", serif;
+        letter-spacing: 0.02em;
+      }
+
+      /* Виниловая пластинка */
+      .player-container {
+        margin: 40px auto;
+        position: relative;
+        width: 180px;
+        height: 180px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .vinyl-record {
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          #333 0%,
+          #111 40%,
+          #333 41%,
+          #111 60%,
+          #333 61%,
+          #000 100%
+        );
+        border-radius: 50%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        animation: rotate 5s linear infinite;
+        animation-play-state: paused;
+      }
+
+      .vinyl-record.playing {
+        animation-play-state: running;
+      }
+
+      .vinyl-center {
+        width: 60px;
+        height: 60px;
+        background-color: var(--gold);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        border: 4px solid #000;
+      }
+
+      .play-icon {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 15px solid white;
+        margin-left: 5px;
+      }
+
+      .pause-icon {
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .pause-icon::before,
+      .pause-icon::after {
+        content: "";
+        width: 5px;
+        height: 100%;
+        background: white;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Таймер */
+      .timer-item {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        min-width: 80px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid #eee;
+      }
+
+      .timer-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--gold);
+        display: block;
+      }
+
+      .timer-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      /* Декор */
+      .divider {
+        width: 100px;
+        height: 1px;
+        background: var(--gold);
+        margin: 20px auto;
+      }
+
+      .btn-2gis {
+        background-color: #26a65b;
+        color: white;
+        padding: 14px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s;
+        font-weight: 600;
+      }
+
+      .btn-2gis:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(38, 166, 91, 0.4);
+      }
+      .elegant-calligraphy {
+        font-family: "Marck Script", cursive;
+        color: var(--gold);
+        text-shadow: 0.5px 0.5px 0px rgba(0, 0, 0, 0.05);
+        letter-spacing: 0.02em;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero-section" id="home">
+      <div class="relative z-10 px-4">
+        <p class="fade-in text-lg md:text-xl tracking-[0.3em] uppercase mb-4">
+          Үйлену тойына шақыру
+        </p>
+        <div class="invitation-header">
+          <h1 class="fade-in name-title">Дамир & Мадина</h1>
+        </div>
+        <div class="divider fade-in"></div>
+        <p class="fade-in serif-font text-3xl md:text-4xl italic">
+          18 шілде 2026
+        </p>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 text-center bg-white">
+      <div class="max-w-xl mx-auto">
+        <h2 class="fade-in serif-font text-4xl mb-4">Махаббатымыздың әуені</h2>
+        <p class="fade-in text-gray-500 mb-8 italic">
+          Музыка ойнау үшін күйтабақты басыңыз
+        </p>
+
+        <div class="player-container fade-in">
+          <div class="vinyl-record" id="vinyl">
+            <div class="vinyl-center">
+              <div id="player-icon" class="play-icon"></div>
+            </div>
+          </div>
+          <audio id="bg-music" loop preload="auto">
+            <source
+              src="RaiM_Erke_-_Bul_mahabbat_76632958.mp3"
+              type="audio/mpeg"
+            />
+          </audio>
+        </div>
+        <p class="fade-in font-semibold tracking-wide">
+          RaiM & Erke — Bul mahabbat
+        </p>
+      </div>
+    </section>
+
+    <section class="py-16 px-4 bg-[#fdfaf5]">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="mb-12">
+          <h3 class="fade-in serif-font text-4xl mb-6">
+            Қымбатты ағайын-туыстар және достар!
+          </h3>
+          <p class="fade-in text-lg leading-relaxed mb-4">
+            Өміріміздегі ең маңызды әрі ең бақытты сәт — үйлену тойымыздың
+            қуанышын бізбен бірге бөлісуге шақырамыз!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div
+            class="fade-in border-r-0 md:border-r border-gold border-opacity-30 p-6"
+          >
+            <h4 class="serif-font text-3xl text-gold mb-2">ҚАЙДА</h4>
+            <p class="font-bold text-xl mb-1">"Sahil" Мейрамханасы</p>
+            <p class="text-gray-600">Бауыржан Момышұлы даңғылы, 6а</p>
+            <p class="text-gray-500 text-sm mt-2">Астана қаласы</p>
+          </div>
+          <div class="fade-in p-6">
+            <h4 class="serif-font text-3xl text-gold mb-2">ҚАШАН</h4>
+            <p class="font-bold text-xl mb-1">18.07.2026</p>
+            <p class="text-gray-600">Басталуы: 15:00</p>
+            <p class="text-gray-500 text-sm mt-2">Сенбі</p>
+          </div>
+        </div>
+
+        <div class="mb-16">
+          <h3 class="fade-in serif-font text-3xl mb-8">Тойға дейін:</h3>
+          <div class="flex justify-center gap-4 fade-in" id="countdown">
+            <div class="timer-item">
+              <span class="timer-number" id="days">00</span>
+              <span class="timer-label">Күн</span>
+            </div>
+            <div class="timer-item">
+              <span class="timer-number" id="hours">00</span>
+              <span class="timer-label">Сағат</span>
+            </div>
+            <div class="timer-item">
+              <span class="timer-number" id="minutes">00</span>
+              <span class="timer-label">Минут</span>
+            </div>
+            <div class="timer-item">
+              <span class="timer-number" id="seconds">00</span>
+              <span class="timer-label">Секунд</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fade-in">
+          <a
+            href="https://2gis.kz/astana/search/%D0%BF%D1%80%D0%BE%D1%81%D0%BF.%20%D0%91%D0%B0%D1%83%D1%8B%D1%80%D0%B6%D0%B0%D0%BD%D0%B0%20%D0%9C%D0%BE%D0%BC%D1%8B%D1%88%D1%83%D0%BB%D1%8B%208%2C%20%D0%90%D1%81%D1%82%D0%B0%D0%BD%D0%B0%20010000%20Sahil/firm/70000001018072645/71.473838%2C51.138372"
+            target="_blank"
+            class="btn-2gis shadow-lg"
+          >
+            <span>2ГИС картасын ашу</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-12 text-center bg-white border-t border-gray-100">
+      <div class="invitation-header">
+        <p class="fade-in invitation-text">Сіздерді күтеміз!</p>
+      </div>
+      <p class="fade-in text-gray-400 text-sm italic">Дамир & Мадина</p>
+    </footer>
+
+    <script>
+      const observerOptions = { threshold: 0.1 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document
+        .querySelectorAll(".fade-in")
+        .forEach((el) => observer.observe(el));
+
+      const vinyl = document.getElementById("vinyl");
+      const audio = document.getElementById("bg-music");
+      const icon = document.getElementById("player-icon");
+      let isPlaying = false;
+
+      vinyl.addEventListener("click", async () => {
+        if (!isPlaying) {
+          try {
+            await audio.play();
+            vinyl.classList.add("playing");
+            icon.className = "pause-icon";
+            isPlaying = true;
+          } catch (err) {
+            console.error("Error playing audio:", err);
+          }
+        } else {
+          audio.pause();
+          vinyl.classList.remove("playing");
+          icon.className = "play-icon";
+          isPlaying = false;
+        }
+      });
+
+      const weddingDate = new Date("July 18, 2026 15:00:00").getTime();
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+          clearInterval(timerInterval);
+          document.getElementById("countdown").innerHTML =
+            "<p class='text-gold text-2xl serif-font'>Бұл керемет күн келді!</p>";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = days
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("hours").innerText = hours
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("minutes").innerText = minutes
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("seconds").innerText = seconds
+          .toString()
+          .padStart(2, "0");
+      }
+
+      const timerInterval = setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
+  </body>
+</html>
